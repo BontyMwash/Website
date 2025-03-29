@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Classroom Management system </title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,67 +7,54 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Classroom Management System</h1>
-
-    <!-- Login Form -->
-    <div id="login-section">
+    <div id="login-container">
         <h2>Teacher Login</h2>
-        <input type="text" id="teacherUsername" placeholder="Username">
-        <input type="password" id="teacherPassword" placeholder="Password">
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
         <button onclick="login()">Login</button>
     </div>
 
-    <!-- Dashboard -->
     <div id="dashboard" style="display: none;">
         <h2>Welcome, <span id="teacherName"></span></h2>
         <button onclick="logout()">Logout</button>
 
-        <!-- Select Class & Stream -->
+        <!-- Class & Stream Selection -->
         <h3>Select Class & Stream</h3>
         <select id="classSelect" onchange="loadStreams()">
             <option value="Form 2">Form 2</option>
             <option value="Form 3">Form 3</option>
             <option value="Form 4">Form 4</option>
         </select>
-        
-        <select id="streamSelect">
-            <!-- Streams will be loaded dynamically -->
-        </select>
+        <select id="streamSelect"></select>
+
+        <!-- Add/Remove Students -->
+        <h3>Manage Students</h3>
+        <input type="text" id="studentName" placeholder="Student Name">
+        <input type="text" id="studentID" placeholder="Student ID">
+        <button onclick="addStudent()">Add Student</button>
+        <button onclick="removeStudent()">Remove Student</button>
 
         <!-- Student Records -->
-        <h3>Student Records</h3>
-        <button onclick="loadStudents()">Load Students</button>
+        <h3>Student List</h3>
         <table id="studentsTable">
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>ID</th>
                     <th>Performance</th>
                     <th>Attendance</th>
-                    <th>Seating</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Student data will be loaded here -->
+                <!-- Student Data will be added here dynamically -->
             </tbody>
         </table>
 
-        <!-- Upload CSV -->
-        <h3>Import Students (CSV)</h3>
-        <input type="file" id="csvFileInput" accept=".csv">
-        <button onclick="importCSV()">Import</button>
-
-        <!-- Seating Arrangement -->
-        <h3>Seating Arrangement</h3>
-        <div id="seatingArrangement">
-            <!-- Seating chart will be dynamically created -->
-        </div>
+        <!-- Generate Report -->
+        <h3>Generate Report</h3>
+        <button onclick="generateReport()">Download Report</button>
     </div>
 
     <script src="script.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
 </body>
 </html>
