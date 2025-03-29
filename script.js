@@ -1,77 +1,95 @@
-// Simulated Teacher Login
+// Simulated teacher login credentials
+const teachers = [{ username: "teacher", password: "1234" }];
+
 function login() {
-    let username = document.getElementById('teacherUsername').value;
-    let password = document.getElementById('teacherPassword').value;
-    
-    if (username === "teacher" && password === "1234") {
-        document.getElementById('login-section').style.display = "none";
-        document.getElementById('dashboard').style.display = "block";
-        document.getElementById('teacherName').innerText = username;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let validTeacher = teachers.find(t => t.username === username && t.password === password);
+
+    if (validTeacher) {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("teacherName").innerText = username;
     } else {
-        alert("Invalid credentials!");
+        alert("Invalid Credentials!");
     }
 }
 
-// Logout Function
 function logout() {
-    document.getElementById('login-section').style.display = "block";
-    document.getElementById('dashboard').style.display = "none";
+    document.getElementById("login-container").style.display = "block";
+    document.getElementById("dashboard").style.display = "none";
 }
 
-// Load Streams Based on Class
+// Load Streams Based on Selected Class
 function loadStreams() {
-    let classSelect = document.getElementById('classSelect').value;
-    let streamSelect = document.getElementById('streamSelect');
+    let classSelect = document.getElementById("classSelect").value;
+    let streamSelect = document.getElementById("streamSelect");
 
     streamSelect.innerHTML = ""; // Clear previous options
 
     let numStreams = classSelect === "Form 2" ? 9 : 6;
     for (let i = 1; i <= numStreams; i++) {
-        let option = document.createElement('option');
+        let option = document.createElement("option");
         option.value = `Stream ${i}`;
         option.textContent = `Stream ${i}`;
         streamSelect.appendChild(option);
     }
 }
 
-// Load Students into Table
-function loadStudents() {
-    let tableBody = document.getElementById('studentsTable').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = "";
+// Student Management
+let students = [];
 
-    let students = [
-        { name: "John Doe", performance: "A", attendance: "Present", seat: "Front" },
-        { name: "Jane Smith", performance: "B", attendance: "Absent", seat: "Middle" },
-        { name: "Mark Lee", performance: "C", attendance: "Present", seat: "Back" }
-    ];
+function addStudent() {
+    let name = document.getElementById("studentName").value;
+    let id = document.getElementById("studentID").value;
+
+    if (!name || !id) {
+        alert("Enter both Student Name and ID!");
+        return;
+    }
+
+    students.push({ name, id, performance: "N/A", attendance: "Present" });
+    updateStudentTable();
+    alert("Student Added Successfully!");
+}
+
+function removeStudent() {
+    let id = document.getElementById("studentID").value;
+
+    students = students.filter(student => student.id !== id);
+    updateStudentTable();
+    alert("Student Removed!");
+}
+
+// Update Student Table
+function updateStudentTable() {
+    let tableBody = document.getElementById("studentsTable").getElementsByTagName("tbody")[0];
+    tableBody.innerHTML = "";
 
     students.forEach(student => {
         let row = tableBody.insertRow();
         row.insertCell(0).innerText = student.name;
-        row.insertCell(1).innerText = student.performance;
-        row.insertCell(2).innerText = student.attendance;
-        row.insertCell(3).innerText = student.seat;
+        row.insertCell(1).innerText = student.id;
+        row.insertCell(2).innerText = student.performance;
+        row.insertCell(3).innerText = student.attendance;
     });
 }
 
-// Import Students from CSV
-function importCSV() {
-    let fileInput = document.getElementById('csvFileInput').files[0];
-    let reader = new FileReader();
+// Report Generation (Download as CSV)
+function generateReport() {
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Name,ID,Performance,Attendance\n";
+    
+    students.forEach(student => {
+        csvContent += `${student.name},${student.id},${student.performance},${student.attendance}\n`;
+    });
 
-    reader.onload = function (event) {
-        let csvData = event.target.result.split("\n").map(row => row.split(","));
-        let tableBody = document.getElementById('studentsTable').getElementsByTagName('tbody')[0];
-
-        csvData.forEach((row, index) => {
-            if (index === 0) return; // Skip header
-            let newRow = tableBody.insertRow();
-            newRow.insertCell(0).innerText = row[0];
-            newRow.insertCell(1).innerText = row[1];
-            newRow.insertCell(2).innerText = row[2];
-            newRow.insertCell(3).innerText = row[3];
-        });
-    };
-
-    reader.readAsText(fileInput);
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "class_report.csv");
+    document.body.appendChild(link);
+    link.click();
 }
+    
