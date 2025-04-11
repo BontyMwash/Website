@@ -1,60 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom Management System</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bonty Graphix - Graphix Designer</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <div id="login-container">
-        <h2>Teacher Login</h2>
-        <input type="text" id="username" placeholder="Enter Username">
-        <input type="password" id="password" placeholder="Enter Password">
-        <button onclick="login()">Login</button>
+  <div id="splash-screen">
+  <div class="splash-content">
+    <img src="https://bontymwash.github.io/Website/M2.jpg" alt="Splash Logo" />
+  </div>
+  </div>
+  
+  <header>
+    <div class="marquee-container">
+  <div class="marquee-text">We are open for any service 24/7 — Contact us anytime!</div>
+</div>
+
+    <nav>
+      <a href="#" class="logo">
+  <img src="https://bontymwash.github.io/Website/M2.jpg" alt= >
+  Bonty Graphix
+</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="hero">
+  <div class="overlay">
+    <img src="https://bontymwash.github.io/Website/B1.jpg" class="blend-image" alt="Header Art" />
+    <h2>Hello, I'm a Graphix Designer, Website and Mobile App Developer</h2>
+    <p>I design visual experiences that tell powerful stories.</p>
+    <a href="#portfolio" class="btn">View My Work</a>
+  </div>
+</section>
+
+    
+
+  </header>
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>I’m a versatile and creative digital professional with a passion for bringing ideas to life through design and technology. With a strong foundation in graphic design, web development, and mobile app development, I craft engaging user experiences across platforms. Whether it’s building dynamic websites, developing sleek mobile applications, or designing eye-catching social media graphics, I merge creativity with functionality to help brands stand out.
+
+In addition to my technical skills, I specialize in photo editing and visual storytelling, ensuring that every project I work on is polished, professional, and visually compelling. From concept to execution, I strive to deliver high-quality results that not only meet but exceed expectations.
+
+Let’s create something amazing together.</p>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <h2>My Portfolio</h2>
+    <div class="grid">
+      <div class="card"><img src="https://bontymwash.github.io/Website/M1.jpg" alt="Project 1"/><p>Business Identity</p></div>
+      <div class="card"><img src="https://bontymwash.github.io/Website/M2.jpg" alt="Project 2"/><p>Logo Design</p></div>
+      <div class="card"><img src="https://bontymwash.github.io/Website/M3.jpg" alt="Project 3"/><p>Poster Design</p></div>
+      <div class="card"><img src=" https://bontymwash.github.io/Website/B2.jpg" alt="Project 4"/>
+   <p>Poster Design 2</p></div>
     </div>
+  </section>
 
-    <div id="dashboard" style="display: none;">
-        <h2>Welcome, <span id="teacherName"></span></h2>
-        <button onclick="logout()">Logout</button>
+  <section id="services" class="services">
+    <h2>Services</h2>
+    <ul>
+      <li>🎨 Logo & Poster Design</li>
+      <li>📱Mobile App Development </li>
+      <li> 🌐 Website Design</li>
+      <li>📸 Social Media Graphics</li>
+    </ul>
+  </section>
 
-        <!-- Class & Stream Selection -->
-        <h3>Select Class & Stream</h3>
-        <select id="classSelect" onchange="loadStreams()">
-            <option value="Form 2">Form 2</option>
-            <option value="Form 3">Form 3</option>
-            <option value="Form 4">Form 4</option>
-        </select>
-        <select id="streamSelect"></select>
+  <section id="contact" 
+           class="contact">
+              <h2>ContactUs<h2>
+                <u1>
+  <h2>Let's Chat on WhatsApp</h2>
+  <p>Have a project in mind or just want to say hi? I'm just a message away.</p>
+  <a href="https://wa.me/254768526724" target="_blank" class="whatsapp-btn">Message Me on WhatsApp</a>
+  </section>
 
-        <!-- Add/Remove Students -->
-        <h3>Manage Students</h3>
-        <input type="text" id="studentName" placeholder="Student Name">
-        <input type="text" id="studentID" placeholder="Student ID">
-        <button onclick="addStudent()">Add Student</button>
-        <button onclick="removeStudent()">Remove Student</button>
+  <footer>
+    <p>&copy; 2025 Creative Graphix Studio. All rights reserved.</p>
+  </footer>
 
-        <!-- Student Records -->
-        <h3>Student List</h3>
-        <table id="studentsTable">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>ID</th>
-                    <th>Performance</th>
-                    <th>Attendance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Student Data will be added here dynamically -->
-            </tbody>
-        </table>
-
-        <!-- Generate Report -->
-        <h3>Generate Report</h3>
-        <button onclick="generateReport()">Download Report</button>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
